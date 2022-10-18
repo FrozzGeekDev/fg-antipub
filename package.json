@@ -1,0 +1,19 @@
+{
+  "name": "fg-antipub",
+  "version": "1.0.1",
+  "description": "Anti pub contre les invitations de serveur discord. (configurable)",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": "https://github.com/FrozzGeekDev/fg_antipub",
+  "keywords": [
+    "discord.js",
+    "discordjs",
+    "discord",
+    "pub",
+    "antipub"
+  ],
+  "author": "Frozz_Geek",
+  "license": "ISC"
+}
