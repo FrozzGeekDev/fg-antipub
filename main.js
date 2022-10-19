@@ -20,6 +20,7 @@ class AntiPub extends EventEmitter {
             whitelistGuild: options.whitelistGuild ? options.whitelistGuild : [],
             whitelistChannel: options.whitelistChannel ? options.whitelistChannel : [],
             whitelistCode: options.whitelistCode ? options.whitelistCode : [],
+            whitelistGName: options.whitelistGName ? options.whitelistGName : [],
 
             channelLogs: options.channelLogs ? options.channelLogs : null,
         }
@@ -44,6 +45,7 @@ class AntiPub extends EventEmitter {
                     if(this.config.whitelistGuild.includes(data.guild.id)) return
                     if(this.config.whitelistChannel.includes(msg.channel.id)) return
                     if(this.config.whitelistCode.includes(data.code)) return
+                    if(this.config.whitelistGName.includes(data.guild.name.toLowerCase())) return
                     if(!this.config.botBlocked) {
                         if(msg.author.bot) {
                             return

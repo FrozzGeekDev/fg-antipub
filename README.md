@@ -1,2 +1,2 @@
-# fg-antipub
-Anti pub contre les liens discord.
+# FG-AntiPub
+## _Anti pub contre les liens de serveur discord_
