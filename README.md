@@ -5,9 +5,9 @@
 ```javascript
 const fg_antipub = require('fg-antipub')
 fg_antipub.options(client, {
-    botBlocked: false, (true / false)
+    botBlocked: false, // (true / false)
     
-    banMember: false, (true / false)
+    banMember: false, // (true / false)
     banReason: "Pub interdite !",
 
     whitelistUser: [], // id membre autorisé
