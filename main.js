@@ -29,12 +29,16 @@ class AntiPub extends EventEmitter {
 
     async checkAdMessage(msg) {
         if(msg.channel.type == 1) return
-        if(msg.content.includes('discord.gg') || msg.content.includes('https://discord.gg')) {
-            var invite = /(discord\.gg)\/.+[A-Z-a-z-1-9]/
+        if(msg.content.includes('discord.gg') || msg.content.includes('discord.com/invite')) {
+            var invite = /(discord\.gg|discord.com\/invite)\/.+[A-Z-a-z-0-9]/
             var link = invite.exec(msg.content)
 
             if(link) {
-                var invite_info = link[0].split('/')[1]
+                if(msg.content.includes('discord.gg')) {
+                    var invite_info = link[0].split('/')[1]
+                } else if(msg.content.includes('discord.com/invite')) {
+                    var invite_info = link[0].split('/')[2]
+                }
 
                 const result = await request(`https://discord.com/api/v8/invites/${invite_info}?with_counts=1`)
                 const data = await functions.parseData(result.body)
@@ -42,6 +46,7 @@ class AntiPub extends EventEmitter {
                 if(data) {
                     if(data.code == 10006) return
 
+                    if(data.guild.id == msg.guild.id) return
                     if(this.config.whitelistUser.includes(msg.author.id)) return
                     if(this.config.whitelistGuild.includes(data.guild.id)) return
                     if(this.config.whitelistChannel.includes(msg.channel.id)) return
