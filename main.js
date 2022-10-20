@@ -13,6 +13,7 @@ class AntiPub extends EventEmitter {
         this.client = client
         this.config = {
             botBlocked: options.botBlocked ? options.botBlocked : false,
+
             banMember: options.banMember ? options.banMember : false,
             banReason: options.banReason ? options.banReason : "Pub interdite !",
 
@@ -45,7 +46,12 @@ class AntiPub extends EventEmitter {
                     if(this.config.whitelistGuild.includes(data.guild.id)) return
                     if(this.config.whitelistChannel.includes(msg.channel.id)) return
                     if(this.config.whitelistCode.includes(data.code)) return
-                    if(this.config.whitelistGName.includes(data.guild.name.toLowerCase())) return
+                    if(this.config.whitelistGName) {
+                        var guildName = data.guild.name.toLowerCase()
+                        for(var i = 0; i < this.config.whitelistGName.length; i++) {
+                            if(guildName.includes(this.config.whitelistGName[i])) return
+                        }
+                    }
                     if(!this.config.botBlocked) {
                         if(msg.author.bot) {
                             return
