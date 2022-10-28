@@ -4,6 +4,7 @@
 # Utilisation
 ```javascript
 const fg_antipub = require('fg-antipub')
+
 fg_antipub.options(client, {
     botBlocked: false, // (true / false)
     
