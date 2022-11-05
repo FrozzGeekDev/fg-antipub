@@ -84,7 +84,7 @@ class AntiPub extends EventEmitter {
                                 embedLogs.setColor('#0070FF')
                                 embedLogs.setThumbnail(`https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.png`)
                                 embedLogs.setTitle(`⚠️ Anti-Pub`)
-                                embedLogs.addFields({ name: `✍️ Auteur`, value: `> Membre : ${msg.author} (\`${msg.author.id}\`) \n> Salon : ${msg.channel} (\`${msg.channel.id}\`)` })
+                                embedLogs.addFields({ name: `✍️ Auteur`, value: `> Membre : ${msg.author} (\`${msg.author.id}\`) \n> Salon : ${msg.channel} (\`${msg.channel.id}\`) \n Serveur : \`${msg.guild.name}\` (\`${msg.guild.id}\`)` })
                                 embedLogs.addFields({ name: `❓ Informations`, value: `> Nom du serveur : \`${data.guild.name}\` (\`${data.guild.id}\`) \n> Description: \`${data.guild.description ? data.guild.description : 'Non défini'}\` \n> Invitation : https://discord.gg/${invite_info}` })
                                 embedLogs.setFooter({ text: 'FG - AntiPub', iconURL: this.client.user.avatarURL() })
                                 embedLogs.setTimestamp()
