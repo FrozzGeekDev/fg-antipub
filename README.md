@@ -3,19 +3,19 @@
 
 # Utilisation
 ```javascript
-const fg_antipub = require('fg-antipub')
+const AntiPub = require('fg-antipub')
 
-fg_antipub.options(client, {
+const fg_antipub = new AntiPub(client, {
     botBlocked: false, // (true / false)
     
-    banMember: false, // (true / false)
-    banReason: "Pub interdite !",
+    timeoutCount: 2, // Nombre d'avertissement avant le timeout
+    banCount: 3, // Nombre d'avertissement avant le ban
 
-    whitelistUser: [], // id membre autorisé
-    whitelistGuild: [], // id des serveurs autorisé
-    whitelistChannel: [], // id des salons autorisé
-    whitelistCode: [], // code des invitations autorisé
-    whitelistGName: [], // code nom serveur autorisé
+    whitelistUser: [], // IDs membre autorisé
+    whitelistGuild: [], // IDs des serveurs autorisé
+    whitelistChannel: [], // IDs des salons autorisé
+    whitelistCode: [], // Code des invitations autorisé
+    whitelistGName: [], // Code nom serveur autorisé
 
     channelLogs: null, // ID du salon des logs. (null = désactivé)
 })
@@ -24,8 +24,18 @@ client.on('messageCreate', async (message) => {
     await fg_antipub.checkAdMessage(message)
 })
 
-fg_antipub.on('fg_adBlocked', async (data) => {
-    data.message.delete()
-    data.message.channel.send(`> :warning: ${data.message.author}, **la pub est interdit sur ce serveur !** :warning:`)
+fg_antipub.on('adBlocked', async (msg, data, warning) => {
+    msg.delete()
+    msg.channel.send(`> :warning: ${msg.author}, la pub est interdit sur ce serveur ! (\`${warning}\`/\`${banCount}\`) :warning:`)
+})
+
+fg_antipub.on('adTimeoutUser', async (msg, member) => {
+    var memberGuild = msg.guild.members.cache.get(member.id)
+    memberGuild.timeout(60_000*5, 'Pub discord interdit')
+})
+
+fg_antipub.on('adBanUser', async (msg, member) => {
+    var memberGuild = msg.guild.members.cache.get(member.id)
+    memberGuild.ban({ reason: 'Pub discord interdit', deleteMessageSeconds: 3 * 24 * 60 * 60 })
 })
 ```
