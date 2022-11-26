@@ -20,7 +20,7 @@ export interface AntiPubEvents {
 
 export class AntiPub {
   public constructor(options: AntiPubOptions);
-  public checkAdMessage(message: Message): void;
+  public checkAdMessage(client: Object, message: Message): void;
   public on<K extends keyof AntiPubEvents>(
     event: K,
     listener: (...args: AntiPubEvents[K]) => void

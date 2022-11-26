@@ -18,20 +18,22 @@ class AntiPub extends EventEmitter {
      * @param {String} options.channelLogs: Le salon logs des pubs
     */
 
-    constructor(client, options) {
+    constructor(options) {
         super()
 
-        this.client = client
         this.config = options
         this.warnings = new Map()
     }
 
     /**
      * Ceci initialise l'AntiPub et démarre le filtre
+     * @param {Object} client: Client du bot
      * @param {Message} message: Le message filtrer
     */
 
-    async checkAdMessage(msg) {
+    async checkAdMessage(client, msg) {
+        this.client = client
+        
         if(msg.channel.type == 1) return
         if(msg.content.includes('discord.gg') || msg.content.includes('discord.com/invite')) {
             var invite = /(discord\.gg|discord.com\/invite)\/.+[A-Z-a-z-0-9]/

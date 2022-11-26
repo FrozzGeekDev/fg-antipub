@@ -1,6 +1,6 @@
 {
   "name": "fg-antipub",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Anti pub contre les invitations de serveur discord. (configurable)",
   "main": "main.js",
   "types": "type/main.js",
